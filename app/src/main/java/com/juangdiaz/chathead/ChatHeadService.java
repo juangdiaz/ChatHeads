@@ -3,37 +3,27 @@ package com.juangdiaz.chathead;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.PixelFormat;
-import android.hardware.SensorManager;
 import android.os.IBinder;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.squareup.seismic.ShakeDetector;
 
 /**
  * Created by juangdiaz on 4/13/15.
  */
-public class ChatHeadService extends Service  implements ShakeDetector.Listener {
+public class ChatHeadService extends Service  {
 
     private WindowManager windowManager;
     private ImageView chatHead;
     WindowManager.LayoutParams params;
-    ShakeDetector sd;
-    SensorManager sensorManager;
+
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        //Shaker
-
-         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-         sd = new ShakeDetector(this);
-        sd.start(sensorManager);
 
         windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
 
@@ -96,11 +86,6 @@ public class ChatHeadService extends Service  implements ShakeDetector.Listener 
         return null;
     }
 
-    @Override
-    public void hearShake() {
-        sd.stop();
-        onDestroy();
-        Toast.makeText(this, "Don't shake me, bro!", Toast.LENGTH_SHORT).show();
-    }
+
 }
 
